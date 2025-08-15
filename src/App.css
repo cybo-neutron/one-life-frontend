@@ -25,5 +25,5 @@
   --color-secondary-950: theme(colors.zinc.950);
 }
 :root {
-  /* background-color: rgb(31, 31, 31); */
+  background-color: rgb(31, 31, 31);
 }

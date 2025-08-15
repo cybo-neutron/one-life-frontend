@@ -1,5 +1,5 @@
+import { Link } from "@tanstack/react-router";
 import { LayoutDashboard, Timer, User } from "lucide-react";
-import React from "react";
 
 const SideNav = () => {
   return (
@@ -12,14 +12,18 @@ const SideNav = () => {
       </div>
 
       <div className="mt-20 flex flex-col gap-4">
-        <LayoutDashboard
-          size={30}
-          className="text-secondary-300 shadow-md p-1  hover:bg-secondary-200 hover:text-secondary-800 cursor-pointer"
-        />
-        <Timer
-          size={30}
-          className="text-secondary-300 shadow-md p-1  hover:bg-secondary-200 hover:text-secondary-800 cursor-pointer"
-        />
+        <Link to={"/dashboard"}>
+          <LayoutDashboard
+            size={30}
+            className="text-secondary-300 shadow-md p-1  hover:bg-secondary-200 hover:text-secondary-800 cursor-pointer"
+          />
+        </Link>
+        <Link to={"/pomodoro"}>
+          <Timer
+            size={30}
+            className="text-secondary-300 shadow-md p-1  hover:bg-secondary-200 hover:text-secondary-800 cursor-pointer"
+          />
+        </Link>
       </div>
 
       <div></div>
