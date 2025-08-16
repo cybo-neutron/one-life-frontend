@@ -6,8 +6,8 @@ import {
 } from "@tanstack/react-router";
 import Pomodoro from "./pomodoro";
 import Dashboard from "./dashboard";
-import SideNav from "../components/SideNav";
 import RootLayout from "./layout";
+import Notes from "./notes";
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -18,7 +18,7 @@ const rootRoute = createRootRoute({
 });
 
 const dashboardRoute = createRoute({
-  path: "/dashboard",
+  path: "/",
   getParentRoute: () => rootRoute,
   component: () => (
     <>
@@ -41,7 +41,19 @@ const pomodoroRoute = createRoute({
   ),
 });
 
-const routeTree = rootRoute.addChildren([pomodoroRoute, dashboardRoute]);
+const notesRoute = createRoute({
+  path : "/notes",
+  getParentRoute: () => rootRoute,
+  component: () => (
+    <>
+      <RootLayout>
+        <Notes />
+      </RootLayout>
+    </>
+  ),
+})
+
+const routeTree = rootRoute.addChildren([pomodoroRoute, dashboardRoute, notesRoute]);
 
 const router = createRouter({ routeTree });
 

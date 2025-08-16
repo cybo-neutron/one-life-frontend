@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { LayoutDashboard, Timer, User } from "lucide-react";
+import { LayoutDashboard, Notebook, Timer, User } from "lucide-react";
+import CustomTooltip from "./custom/CustomTooltip";
 
 const SideNav = () => {
   return (
@@ -12,17 +13,30 @@ const SideNav = () => {
       </div>
 
       <div className="mt-20 flex flex-col gap-4">
-        <Link to={"/dashboard"}>
-          <LayoutDashboard
-            size={30}
-            className="text-secondary-300 shadow-md p-1  hover:bg-secondary-200 hover:text-secondary-800 cursor-pointer"
-          />
+        <Link to={"/"}>
+          <CustomTooltip title="Dashboard" side="right">
+            <LayoutDashboard
+              size={30}
+              className="text-secondary-300 shadow-md p-1  hover:bg-secondary-200 hover:text-secondary-800 cursor-pointer"
+            />
+          </CustomTooltip>
         </Link>
+
         <Link to={"/pomodoro"}>
-          <Timer
-            size={30}
-            className="text-secondary-300 shadow-md p-1  hover:bg-secondary-200 hover:text-secondary-800 cursor-pointer"
-          />
+          <CustomTooltip title="Pomodoro" side="right">
+            <Timer
+              size={30}
+              className="text-secondary-300 shadow-md p-1  hover:bg-secondary-200 hover:text-secondary-800 cursor-pointer"
+            />
+          </CustomTooltip>
+        </Link>
+        <Link to={"/notes"}>
+          <CustomTooltip title="Notes" side="right">
+            <Notebook
+              size={30}
+              className="text-secondary-300 shadow-md p-1  hover:bg-secondary-200 hover:text-secondary-800 cursor-pointer"
+            />
+          </CustomTooltip>
         </Link>
       </div>
 
