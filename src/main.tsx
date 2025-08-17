@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { router } from "./routes/routes";
 import { RouterProvider } from "@tanstack/react-router";
 import "./App.css";
+import "./globals.css"
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

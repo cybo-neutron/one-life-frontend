@@ -1,13 +1,13 @@
 import CustomTabs from "@/components/custom/CustomTabs";
 import { Excalidraw } from "@excalidraw/excalidraw";
 import "@excalidraw/excalidraw/index.css";
-import Notebook from "./Notebook";
+import TiptapEditor from "./TiptapEditor";
 
 const Notes = () => {
   return (
     <div className="z-20 bg-primary-400/20 h-full w-full flex-1">
       {/* <CustomTabs /> */}
-      <Notebook />
+      <TiptapEditor />
     </div>
   );
 };

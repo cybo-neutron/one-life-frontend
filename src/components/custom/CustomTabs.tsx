@@ -3,7 +3,18 @@ import { Separator } from "@radix-ui/react-separator";
 
 import { Excalidraw } from "@excalidraw/excalidraw";
 
-const CustomTabs = () => {
+export type TabItem = { id: string | number; value: string; tabComponent?: React.ReactNode; contentComponent?: React.ReactNode };
+
+type CustomTabsProps = {
+    
+}
+
+
+const CustomTabs = ({
+  tabItems,
+}: {
+  tabItems: TabItem[];
+}) => {
   return (
     <Tabs defaultValue="notes" className="h-full w-full  ">
 
