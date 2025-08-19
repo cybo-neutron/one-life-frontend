@@ -11,7 +11,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 
       <div className="p-2 h-full w-full flex gap-2">
         <SideNav />
-      <div className="flex-1 overflow-y-auto">{children}</div>
+      <div className="z-1 flex-1 overflow-y-auto">{children}</div>
       </div>
     </main>
   );

@@ -1,4 +1,13 @@
+import CustomDropDown from "@/components/custom/CustomDropDown";
 import { Button } from "@/components/ui/button";
+import { DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useCallback, useEffect, useRef } from "react";
 import { useState } from "react";
 
@@ -124,7 +133,7 @@ const Pomodoro = () => {
   };
 
   return (
-    <div className="w-full h-full bg-secondary-900  grid grid-cols-3 grid-rows-2">
+    <div className="w-full h-full bg-secondary-900/20  grid grid-cols-3 grid-rows-2 gap-2">
       <div className="bg-secondary-700/20 backdrop-blur-xl flex flex-col items-center justify-center">
         <div className="text-2xl md:text-5xl font-bold text-secondary-300">
           {pomo.hours > 0 ? pomo.hours : `0${pomo.hours}`}:

@@ -23,6 +23,7 @@ import {
   ListOrdered,
   ListChecks,
 } from "lucide-react";
+import { LineHeight, TextStyle } from "@tiptap/extension-text-style";
 
 // Command Menu Items
 const COMMAND_ITEMS = [
@@ -255,10 +256,12 @@ export default function TiptapEditor() {
       TaskItem.configure({
         nested: true,
         HTMLAttributes: {
-          class: "flex items-center gap-2",
+          class: "flex gap-2 bg-secondary-900",
         },
       }),
       SlashCommand,
+      TextStyle,
+      LineHeight,
     ],
     content: ` `,
     editorProps: {
@@ -268,12 +271,14 @@ export default function TiptapEditor() {
     },
   });
 
+
+
   if (!editor) {
     return null;
   }
 
   return (
-    <div className="min-h-screen bg-secondary-900 ">
+    <div className=" bg-secondary-900 mt-2">
       <div className="">
         <div className=" backdrop-blur-xl  border border-secondary-700/50 shadow-2xl">
           {/* Toolbar */}
