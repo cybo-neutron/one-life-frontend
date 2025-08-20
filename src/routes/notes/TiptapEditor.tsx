@@ -24,6 +24,9 @@ import {
   ListChecks,
 } from "lucide-react";
 import { LineHeight, TextStyle } from "@tiptap/extension-text-style";
+import { Button } from "@/components/ui/button";
+import fs from "fs";
+import { Input } from "@/components/ui/input";
 
 // Command Menu Items
 const COMMAND_ITEMS = [
@@ -130,7 +133,7 @@ const CommandsList = React.forwardRef<HTMLDivElement, any>((props, ref) => {
   useEffect(() => setSelectedIndex(0), [props.items]);
 
   return (
-    <div className="bg-secondary-800 rounded-lg  m-2 p-2 border-[0.5px] border-secondary-200/20 backdrop-blur-xl shadow-md w-[200px] max-h-80 overflow-auto">
+    <div className="bg-secondary-900/60 rounded-lg  m-2 p-2 border-[0.5px] border-secondary-200/20 backdrop-blur-xl shadow-md w-[200px] max-h-80 overflow-auto">
       {props.items.length ? (
         props.items.map((item: any, index: number) => (
           <button
@@ -269,29 +272,42 @@ export default function TiptapEditor() {
         class: "prose prose-invert max-w-none focus:outline-none",
       },
     },
+    onUpdate: () => {
+      const htmlContent = editor.getHTML();
+    },
   });
 
+  const handleSave = () => {
+    const htmlContent = editor.getHTML();
 
+    console.log(htmlContent);
+  };
 
   if (!editor) {
     return null;
   }
 
   return (
-    <div className=" bg-secondary-900 mt-2">
-      <div className="">
-        <div className=" backdrop-blur-xl  border border-secondary-700/50 shadow-2xl">
-          {/* Toolbar */}
-
+    <div className=" bg-transparent mt-2 w-full">
+      <div className="w-full p-2 flex flex-col gap-2">
+        {/* Toolbar */}
+        <Input
+          placeholder="Enter title"
+          className="text-secondary-200 font-bold outline-none border-none focus-visible:ring-0 focus-visible:border-b-[1px] focus-visible:outline-1 focus-visible:outline-secondary-200/50 md:text-3xl  "
+        />
+        <div className="flex items-center justify-between gap-2">
           <TiptapToolbar editor={editor} />
+          <Button onClick={handleSave} className="rounded-sm m-2">
+            Save
+          </Button>
+        </div>
 
-          {/* Editor */}
-          <div className="p-2 overflow-y-auto max-h-[calc(100vh-90px)]">
-            <EditorContent
-              editor={editor}
-              className="min-h-[calc(100vh-90px)] text-secondary-100"
-            />
-          </div>
+        {/* Editor */}
+        <div className=" overflow-y-auto max-h-[calc(100vh-190px)]">
+          <EditorContent
+            editor={editor}
+            className="min-h-[calc(100vh-200px)]  text-secondary-100 p-2"
+          />
         </div>
       </div>
     </div>

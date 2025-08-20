@@ -63,7 +63,7 @@ const toolbarOptions = (editor: any) => [
 
 const TiptapToolbar = ({ editor }: { editor: any }) => {
   return (
-    <div className="flex items-center gap-2 p-1 border-slate-700/50">
+    <div className="flex items-center gap-2  border-slate-700/50">
       <div className="flex border-[1px] border-secondary-200/20 p-1 rounded-sm ">
         {toolbarOptions(editor).map((option) => {
           return (

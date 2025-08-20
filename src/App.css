@@ -5,6 +5,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
+
 @theme {
   --color-primary-50: theme(colors.purple.50);
   --color-primary-100: theme(colors.purple.100);
@@ -18,7 +19,7 @@
   --color-primary-900: theme(colors.purple.900);
   --color-primary-950: theme(colors.purple.950);
 
-  --color-secondary-50: theme(colors.zinc.50); 
+  --color-secondary-50:  theme(colors.zinc.50); 
   --color-secondary-100: theme(colors.zinc.100);
   --color-secondary-200: theme(colors.zinc.200);
   --color-secondary-300: theme(colors.zinc.300);
