@@ -7,11 +7,11 @@ import {
   ResizablePanel,
   ResizableHandle,
 } from "@/components/ui/resizable";
+import Diagram from "./Diagram";
 
 const Notes = () => {
   return (
     <div className="z-20 bg-transparent h-full w-full flex-1">
-      {/* <CustomTabs /> */}
       <CustomTabs
         tabItems={[
           {
@@ -26,24 +26,29 @@ const Notes = () => {
           {
             id: 2,
             value: "diagram",
-            contentComponent: <Excalidraw theme="dark" />,
+            contentComponent: (
+              <div className="border-[1px] border-secondary-100/20 shadow-2xl rounded-sm h-full w-full overflow-hidden">
+                <Diagram />
+              </div>
+            ),
           },
 
           {
             id: 3,
             value: "both",
             contentComponent: (
-              <div className="flex">
-                <ResizablePanelGroup direction="horizontal">
-                  <ResizablePanel maxSize={50} minSize={30}>
-                    <TiptapEditor />
-                  </ResizablePanel>
-                  <ResizableHandle className="w-[1px] bg-secondary-100/10" />
-                  <ResizablePanel>
-                    <Excalidraw theme="dark" />
-                  </ResizablePanel>
-                </ResizablePanelGroup>
-              </div>
+              <ResizablePanelGroup
+                direction="horizontal"
+                className="h-full w-full border-[1px] border-secondary-100/20 shadow-2xl rounded-sm"
+              >
+                <ResizablePanel maxSize={45} minSize={30}>
+                  <TiptapEditor />
+                </ResizablePanel>
+                <ResizableHandle className="w-[1px] bg-secondary-100/10" />
+                <ResizablePanel>
+                  <Diagram />
+                </ResizablePanel>
+              </ResizablePanelGroup>
             ),
           },
         ]}
