@@ -1,5 +1,4 @@
 import CustomTabs from "@/components/custom/CustomTabs";
-import { Excalidraw } from "@excalidraw/excalidraw";
 import "@excalidraw/excalidraw/index.css";
 import TiptapEditor from "./TiptapEditor";
 import {
