@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "client",
+  "productName": "One Life",
   "version": "0.1.0",
   "identifier": "com.client.app",
   "build": {
@@ -10,16 +10,16 @@
     "frontendDist": "../dist"
   },
   "app": {
+    "security": {
+      "csp": null
+    },
     "windows": [
       {
-        "title": "client",
+        "title": "One Life",
         "width": 800,
         "height": 600
       }
-    ],
-    "security": {
-      "csp": null
-    }
+    ]
   },
   "bundle": {
     "active": true,
@@ -31,5 +31,10 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ]
+  },
+  "plugins": {
+    "fs": {
+      "requireLiteralLeadingDot": false
+    }
   }
 }
