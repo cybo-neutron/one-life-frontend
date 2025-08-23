@@ -7,14 +7,30 @@ import {
   ResizableHandle,
 } from "@/components/ui/resizable";
 import Diagram from "./Diagram";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { usePubSub, useSubscribe } from "@/context/pub_sub/usePubSub";
 import { events } from "@/constants/events";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 
 const Notes = () => {
   const { publish } = usePubSub();
+  const [fileModalOpen, setFileModalOpen] = useState(false);
+
   useSubscribe(events.notes.OPEN_FILES, () => {
     console.log("Open files");
+    setFileModalOpen(true);
   });
 
   useEffect(() => {
@@ -75,6 +91,34 @@ const Notes = () => {
           },
         ]}
       />
+
+      <Dialog open={fileModalOpen} onOpenChange={setFileModalOpen}>
+        {/* <DialogTrigger></DialogTrigger> */}
+        <DialogContent className="p-2 bg-secondary-900 text-secondary-200 border-secondary-100/20">
+          {/* <DialogHeader>
+            <DialogTitle>Open Files</DialogTitle>
+          </DialogHeader> */}
+          <div>
+            <div className="flex gap-2">
+              <Input
+                placeholder="Search files..."
+                className="w-[95%] focus-visible:ring-0 border-0"
+              />
+              {/* <Button>Search</Button> */}
+            </div>
+            <Separator className="my-2 bg-secondary-100/10" />
+            <div>
+              <div>Files</div>
+            </div>
+          </div>
+          {/* <DialogFooter>
+            <DialogClose>Cancel</DialogClose>
+            <DialogClose asChild>
+              <Button>Open</Button>
+            </DialogClose>
+          </DialogFooter> */}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
