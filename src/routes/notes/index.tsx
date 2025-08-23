@@ -7,8 +7,31 @@ import {
   ResizableHandle,
 } from "@/components/ui/resizable";
 import Diagram from "./Diagram";
+import { useEffect } from "react";
+import { usePubSub, useSubscribe } from "@/context/pub_sub/usePubSub";
+import { events } from "@/constants/events";
 
 const Notes = () => {
+  const { publish } = usePubSub();
+  useSubscribe(events.notes.OPEN_FILES, () => {
+    console.log("Open files");
+  });
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "o" && e.metaKey) {
+        publish(events.notes.OPEN_FILES, {});
+      }
+    };
+
+    // listen for command + o key
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   return (
     <div className="z-20 bg-transparent h-full w-full flex-1">
       <CustomTabs

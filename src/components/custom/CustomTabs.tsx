@@ -22,7 +22,7 @@ const CustomTabs = ({ tabItems }: CustomTabsProps) => {
           {tabItems.map((item, index) => (
             <>
               <TabsTrigger
-                key={index}
+                key={item.value}
                 value={item.value}
                 className="text-secondary-300 data-[state=active]:text-secondary-800  "
               >

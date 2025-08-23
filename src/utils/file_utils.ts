@@ -1,4 +1,9 @@
-import { exists, readFile, writeTextFile, BaseDirectory } from "@tauri-apps/plugin-fs";
+import {
+  exists,
+  readFile,
+  writeTextFile,
+  BaseDirectory,
+} from "@tauri-apps/plugin-fs";
 
 export const fileExists = async ({
   path,
@@ -33,21 +38,21 @@ export const readFileContent = async ({
   }
 };
 
-
 export const writeFileContent = async ({
   path,
   content,
   baseDir,
 }: {
   path: string;
-  content : string;
+  content: string;
   baseDir?: BaseDirectory;
 }) => {
   try {
-    const fileContent = await writeTextFile(path, content, { baseDir });
-    return fileContent;
+    console.log("path : ", path);
+    await writeTextFile(path, content, { baseDir });
+    
   } catch (err) {
-    console.log(err);
+    console.log("Error writing file : ", err);
     return false;
   }
 };

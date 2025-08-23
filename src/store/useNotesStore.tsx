@@ -11,6 +11,13 @@ interface NoteStoreActions {
 export const useNotesStore = create<NoteStoreState & NoteStoreActions>(
   (set) => ({
     currentNote: "",
-    updateCurrentNote: (note: string) => set({ currentNote: note }),
+    updateCurrentNote: (note: string) => {
+      console.log("updating note");
+      console.log("note : ", note);
+      // set({ currentNote: note });
+      set((state) => ({
+        currentNote: note,
+      }));
+    },
   })
 );

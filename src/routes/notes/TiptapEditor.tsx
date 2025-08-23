@@ -12,6 +12,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SlashCommand } from "./SlashCommand";
 import { useNotesStore } from "@/store/useNotesStore";
+import { VimMode } from "@prose-motions/core";
+import { readFileContent, writeFileContent } from "@/utils/file_utils";
+import { config } from "@/config/config";
+import { BaseDirectory } from "@tauri-apps/plugin-fs";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 // Main Editor Component
 export default function TiptapEditor() {
@@ -34,6 +40,7 @@ export default function TiptapEditor() {
           },
         },
       }),
+      VimMode,
       Link.configure({
         openOnClick: false,
         HTMLAttributes: {
@@ -44,7 +51,7 @@ export default function TiptapEditor() {
       TaskItem.configure({
         nested: true,
         HTMLAttributes: {
-          class: "flex gap-2 bg-secondary-900",
+          class: "flex gap-2 ",
         },
       }),
       SlashCommand,
@@ -59,14 +66,76 @@ export default function TiptapEditor() {
     },
     onUpdate: () => {
       const htmlContent = editor.getHTML();
-      updateCurrentNote(htmlContent);
+      // updateCurrentNote(htmlContent);
     },
   });
 
   const handleSave = () => {
     const htmlContent = editor.getHTML();
-    updateCurrentNote(htmlContent);
+    console.log("saving content");
+    writeFileContent({
+      path: `${config.notes_path}/n1.html`,
+      content: htmlContent,
+      baseDir: BaseDirectory.Home,
+    })
+      .then(() => {
+        updateCurrentNote(htmlContent);
+        toast("Note saved successfully");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
+  const handleLoad = () => {
+    readFileContent({
+      path: `${config.notes_path}/n1.html`,
+      baseDir: BaseDirectory.Home,
+    })
+      .then((fileContent) => {
+        console.log("file content : ", fileContent);
+        updateCurrentNote(fileContent);
+        editor.commands.setContent(fileContent);
+        editor.commands.focus();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const fileContent = await readFileContent({
+  //       path: `${config.notes_path}/n1.html`,
+  //       baseDir: BaseDirectory.Home,
+  //     });
+  //     updateCurrentNote(fileContent);
+  //   })();
+  // }, []);
+  // useEffect(() => {
+  //   async () => {
+  //     console.log(currentNote)
+  //     await writeFileContent({
+  //       path: `${config.notes_path}/n1.html`,
+  //       content: currentNote,
+  //       baseDir: BaseDirectory.Home,
+  //     });
+  //     toast("Note saved successfully");
+  //   };
+  // }, [currentNote]);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     console.log("loading file content");
+  //     const fileContent = await readFileContent({
+  //       path: `${config.notes_path}/n1.html`,
+  //       baseDir: BaseDirectory.Home,
+  //     });
+  //     console.log(fileContent)
+  //     updateCurrentNote(fileContent);
+  //     editor.commands.setContent(fileContent);
+  //   })();
+  // }, []);
 
   if (!editor) {
     return null;
@@ -81,15 +150,25 @@ export default function TiptapEditor() {
         />
         <div className="flex items-center justify-between gap-2">
           <TiptapToolbar editor={editor} />
-          <Button onClick={handleSave} className="rounded-sm m-2">
-            Save
-          </Button>
+          <div>
+            <Button
+              onClick={handleLoad}
+              variant={"outline"}
+              className="rounded-sm m-2"
+            >
+              Load
+            </Button>
+            <Button onClick={handleSave} className="rounded-sm m-2">
+              Save
+            </Button>
+          </div>
         </div>
 
         <div className=" overflow-y-auto max-h-[calc(100vh-190px)]">
           <EditorContent
             editor={editor}
             className="min-h-[calc(100vh-200px)]  text-secondary-100 p-2"
+            onClick={() => editor?.commands?.focus()}
           />
         </div>
       </div>

@@ -9,7 +9,11 @@
     "fs:default",
     "sql:default",
     {
-      "identifier": "fs:scope",
+      "identifier": "fs:allow-write-text-file",
+      "allow": [{ "path": "$HOME/Documents/one-life/**" }]
+    },
+    {
+      "identifier": "fs:default",
       "allow": [{ "path": "$HOME/Documents/one-life/**" }]
     }
   ]
